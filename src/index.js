@@ -5,7 +5,11 @@ const port = 3000
 const morgan = require('morgan')
 const handlebars = require('express-handlebars')
 const route = require('./routes')
+const db= require('./config/db')
 app.use(express.static(path.join(__dirname,'public')))
+
+//Connect DB
+db.connect();
 
 // Routes innit
 route(app)
@@ -24,10 +28,10 @@ app.set('view engine', 'hbs');
 app.engine('hbs', handlebars(
   {extname:".hbs"}
 ));
-app.set('views', path.join(__dirname, 'resources/views'));
+app.set('views', path.join(__dirname, 'resources','views'));
 // End template engine
 
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+  console.log(`App listening at http://localhost:${port}`)
 })
